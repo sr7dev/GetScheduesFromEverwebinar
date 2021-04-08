@@ -300,152 +300,152 @@ class GetSchedules extends ET_Builder_Module {
 
 		if ($localTime >= 18) {
 			return $this->get_times = sprintf('
-				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="5"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="1"> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="6"> 
 				<label for="second-option" id="second-option-label" class="desktop-selector">
 					<p>Tomorrow at 10:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="2"> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="7"> 
 				<label for="third-option" id="third-option-label" class="desktop-selector">
 					<p>Tomorrow at 12:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="3"> 
+				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="8"> 
 				<label for="fourth-option" id="fourth-option-label" class="desktop-selector">
 					<p>Tomorrow at 4:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="4"> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="9"> 
 				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
 					<p>Tomorrow at 6:00 PM</p>
 				</label> 
 				<select id="mobile-selector">
-					<option value="0">Tomorrow at 8:00 AM</option> 
-					<option value="1">Tomorrow at 10:00 AM</option> 
-					<option value="2">Tomorrow at 12:00 PM</option>
-					<option value="3">Tomorrow at 4:00 PM</option> 
-					<option value="4">Tomorrow at 6:00 PM</option>
+					<option value="5">Tomorrow at 8:00 AM</option> 
+					<option value="6">Tomorrow at 10:00 AM</option> 
+					<option value="7">Tomorrow at 12:00 PM</option>
+					<option value="8">Tomorrow at 4:00 PM</option> 
+					<option value="9">Tomorrow at 6:00 PM</option>
 				</select>'
 			);
 		} else if ($localTime >= 16) {
 			return $this->get_times = sprintf('
-				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="4"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 6:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="1"> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="5"> 
 				<label for="second-option" id="second-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="2"> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="6"> 
 				<label for="third-option" id="third-option-label" class="desktop-selector">
 					<p>Tomorrow at 10:00 AM</p>
 				</label>
-				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="3"> 
+				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="7"> 
 				<label for="fourth-option" id="fourth-option-label" class="desktop-selector">
 					<p>Tomorrow at 12:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="4"> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="8"> 
 				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
 					<p>Tomorrow at 4:00 PM</p>
 				</label>  
 				<select id="mobile-selector">
-					<option value="0">Today at 6:00 pM</option> 
-					<option value="1">Tomorrow at 8:00 AM</option> 
-					<option value="2">Tomorrow at 10:00 AM</option>
-					<option value="1">Tomorrow at 12:00 PM</option> 
-					<option value="2">Tomorrow at 4:00 PM</option>
+					<option value="4">Today at 6:00 pM</option> 
+					<option value="5">Tomorrow at 8:00 AM</option> 
+					<option value="6">Tomorrow at 10:00 AM</option>
+					<option value="7">Tomorrow at 12:00 PM</option> 
+					<option value="8">Tomorrow at 4:00 PM</option>
 				</select>'
 			);
 		} else if ($localTime >= 12) {
 			return $this->get_times = sprintf('
-				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="3"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 4:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="1"> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="4"> 
 				<label for="second-option" id="second-option-label" class="desktop-selector">
 					<p>Today at 6:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="2"> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="5"> 
 				<label for="third-option" id="third-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="3"> 
+				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="6"> 
 				<label for="fourth-option" id="fourth-option-label" class="desktop-selector">
 					<p>Tomorrow at 10:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="4"> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="7"> 
 				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
 					<p>Tomorrow at 12:00 PM</p>
 				</label> 
 				<select id="mobile-selector">
-					<option value="0">Today at 4:00 PM</option> 
-					<option value="1">Today at 6:00 PM</option> 
-					<option value="2">Tomorrow at 8:00 AM</option>
-					<option value="3">Tomorrow at 10:00 AM</option> 
-					<option value="4">Tomorrow at 12:00 PM</option>
+					<option value="3">Today at 4:00 PM</option> 
+					<option value="4">Today at 6:00 PM</option> 
+					<option value="5">Tomorrow at 8:00 AM</option>
+					<option value="6">Tomorrow at 10:00 AM</option> 
+					<option value="7">Tomorrow at 12:00 PM</option>
 				</select>'
 			);
 		} else if ($localTime >= 10) {
 			return $this->get_times = sprintf('
-				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="2"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 12:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="1"> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="3"> 
 				<label for="second-option" id="second-option-label" class="desktop-selector">
 					<p>Today at 4:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="2"> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="4"> 
 				<label for="third-option" id="third-option-label" class="desktop-selector">
 					<p>Today at 6:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="3"> 
+				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="5"> 
 				<label for="fourth-option" id="fourth-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="4"> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="6"> 
 				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
 					<p>Tomorrow at 10:00 AM</p>
 				</label> 
 				<select id="mobile-selector">
-					<option value="0">Today at 12:00 PM</option> 
-					<option value="1">Today at 4:00 PM</option> 
-					<option value="2">Today at 6:00 PM</option>
-					<option value="3">Tomorrow at 8:00 AM</option> 
-					<option value="4">Tomorrow at 10:00 AM</option>
+					<option value="2">Today at 12:00 PM</option> 
+					<option value="3">Today at 4:00 PM</option> 
+					<option value="4">Today at 6:00 PM</option>
+					<option value="5">Tomorrow at 8:00 AM</option> 
+					<option value="6">Tomorrow at 10:00 AM</option>
 				</select>'
 			);
 		} else if ($localTime >= 8) {
 			return $this->get_times = sprintf('
-				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="1"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 10:00 AM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="1"> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="2"> 
 				<label for="second-option" id="second-option-label" class="desktop-selector">
 					<p>Today at 12:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="2"> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="3"> 
 				<label for="third-option" id="third-option-label" class="desktop-selector">
 					<p>Today at 4:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="3"> 
+				<input required="required" type="radio" name="schedule" id="fourth-option" class="desktop-selector" value="4"> 
 				<label for="fourth-option" id="fourth-option-label" class="desktop-selector">
 					<p>Today at 6:00 PM</p>
 				</label> 
-				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="4"> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="5"> 
 				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
 				</label> 
 				<select id="mobile-selector">
-					<option value="0">Today at 10:00 AM</option> 
-					<option value="1">Today at 12:00 PM</option> 
-					<option value="2">Today at 4:00 PM</option>
-					<option value="3">Today at 6:00 PM</option>
-					<option value="4">Tomorrow at 8:00 AM</option>
+					<option value="1">Today at 10:00 AM</option> 
+					<option value="2">Today at 12:00 PM</option> 
+					<option value="3">Today at 4:00 PM</option>
+					<option value="4">Today at 6:00 PM</option>
+					<option value="5">Tomorrow at 8:00 AM</option>
 				</select>'
 			);
 		}	else {
