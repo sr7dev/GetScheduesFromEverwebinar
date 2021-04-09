@@ -69,13 +69,15 @@ function form_handler()
 		),
 	));
 
-	$out = curl_exec($curl);
+	$response = json_decode(curl_exec($curl), true);
+
 	curl_close($curl);
-
-	if ($out) {
-		echo json_encode(['status' => true, 'url' => $out]);
-	} else
-		echo json_encode(['status' => false, 'message' => $out_dec['message']]);
-
+	
+	if (strcasecmp($response['status'], 'success') == 0) {
+		echo json_encode($response);
+	} else {
+		echo json_encode(['status' => false, 'message' => $response['message']]);
+	}
+	
 	die();
 }

@@ -38,13 +38,16 @@ jQuery(document).ready(function ($) {
 		if 	(has_errors) {	
 			return false;
 		}
+		let schedule = parseInt($("input[name='schedule']:checked").val());
+		let checkedValId = $("input[name='schedule']:checked").attr('id');
+		let scheduleTime = $('#'+checkedValId+'-label').find('p').text();
 		
 		data = {
 			first_name: $('#input_1_1').val(),
 			phone_country_code: "1",
 			phone: $('#input_1_5').val(),
 			email: $('#input_1_4').val(),
-			schedule: "1",
+			schedule: schedule,
 			action: 'form_handler'
 		};
  
@@ -55,63 +58,26 @@ jQuery(document).ready(function ($) {
 			success: function (resp) {
 				if (resp) {
 					let data = JSON.parse(resp);
-					if (data.status) {
-						let checkedValue = parseInt($("input[name='schedule']:checked").val());
-						var today = new Date();
-						var tomorrow = new Date(today);
-						tomorrow.setDate(today.getDate() + 1);
-						today.toLocaleString('en-US', { timeZone: 'America/New_York' });
-						tomorrow.toLocaleString('en-US', { timeZone: 'America/New_York' });
-						var dd = today.getDate();
-						var mm = today.getMonth()+1;
-						var yyyy = today.getFullYear();
-						today = yyyy+'-'+mm+'-'+dd;						
-						var tomorrow = tomorrow.getFullYear()+'-'+(tomorrow.getMonth()+1)+'-'+tomorrow.getDate();
-						var scheduleTime;
-						
-						switch (checkedValue) {
-							case 0:
-								scheduleTime = today + " 8:00 AM";
-								break;
-							case 1:
-								scheduleTime = today + " 10:00 AM";
-								break;
-							case 2:
-								scheduleTime = today + " 12:00 PM";
-								break;
-							case 3:
-								scheduleTime = today + " 4:00 PM";
-								break;
-							case 4:
-								scheduleTime = today + " 6:00 PM";
-								break;
-							case 5:								
-								scheduleTime = tomorrow + " 8:00 AM";
-								break;
-							case 6:								
-								scheduleTime = tomorrow + " 10:00 AM";
-								break;
-							case 7:
-								scheduleTime = tomorrow + " 12:00 PM";
-								break;
-							case 8:
-								scheduleTime = tomorrow + " 4:00 PM";
-								break;
-							case 9:
-								scheduleTime = tomorrow + " 6:00 PM";
-								break;
-						}
-						
+					console.log(data);
+					if (data.status == 'success') {
 						$('#thank_you').show();
-						$('#thank_you').find('#schedule_time p span').replaceWith(scheduleTime);
+						$('#thank_you').find('#schedule_time p span').replaceWith(data.user.date);
+						$('#live_room_btn').attr('href', data.user.live_room_url);
 						history.pushState(null, '', '/thankyou/');
 						return false;
 					} else {
-						alert("f")
+						console.log(data.message);
 						return false;
 					}
 				}
 			}
 		});
+	}
+});
+
+$(window).on('load', function(){
+    var url = window.location.pathname;
+	if (url = "/thankyou/") {
+		window.location.href = window.location.origin;
 	}
 });
