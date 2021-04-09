@@ -24,3 +24,58 @@ function divi_initialize_extension() {
 }
 add_action( 'divi_extensions_init', 'divi_initialize_extension' );
 endif;
+
+add_action( 'wp_enqueue_scripts', 'lead_enqueues' );
+add_action('wp_ajax_form_handler', 'form_handler');
+add_action('wp_ajax_nopriv_form_handler', 'form_handler');
+
+function lead_enqueues() 
+{
+	global $post;
+	if (is_a($post, 'WP_Post')) {
+		wp_enqueue_script('script_sec', plugins_url('/js/script.js', __File__), array('jquery', 'jquery-ui-core', 'jquery-ui-autocomplete'), '1.1.0');
+	}
+	if (isset($_SERVER['HTTP_REFERER']) && filter_var($_SERVER['HTTP_REFERER'], FILTER_VALIDATE_URL)) {
+		$referer = $_SERVER['HTTP_REFERER'];
+		$user_agent = filter_var($_SERVER['HTTP_REFERER'], FILTER_SANITIZE_SPECIAL_CHARS);
+		wp_localize_script('script_sec', 'myAjax_sec', array('ajaxurl' => admin_url('admin-ajax.php'), 'ip' => $ip, 'referer' => $referer, 'user_agent' => $user_agent));
+
+	} else {
+			$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "";
+			$user_agent = isset($_SERVER['HTTP_REFERER']) ? filter_var($_SERVER['HTTP_REFERER'], FILTER_SANITIZE_SPECIAL_CHARS) : '';
+			wp_localize_script('script_sec', 'myAjax_sec', array('ajaxurl' => admin_url('admin-ajax.php'), 'ip' => $ip, 'referer' => $referer, 'user_agent' => $user_agent));
+	}
+}
+
+function form_handler()
+{
+
+	$post_fields = 'api_key=93197255-f292-4650-a973-5bd4a0ffaf53&webinar_id=1&first_name='.$_POST['first_name'].'&phone_country_code='.$_POST['phone_country_code'].'&phone='.$_POST['phone'].'&email='.$_POST['email'].'&schedule='.$_POST['schedule'];
+	$curl = curl_init();
+
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => 'https://api.webinarjam.com/everwebinar/register',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS => $post_fields,
+		CURLOPT_HTTPHEADER => array(
+		'Content-Type: application/x-www-form-urlencoded',
+		'Cookie: __cfduid=d0a6cf6c8b50dd4725266715ff4735cd91617788952; wj4s=u5NBNu7NveymPp8In55Ixzl4YEWlNiClqnWSlHlv; XSRF-TOKEN=eyJpdiI6ImhXdWFvNmY3WVlxUTQ1TEJKanRYZVE9PSIsInZhbHVlIjoiaEFHajdpZkN2REdvSUVSVkNuVzhPR2I1VlVMSHJrM3dqSHFyUjhTNkVkYWlCNm1pWnlCMFU0b28zczhWaWg2SCIsIm1hYyI6IjBiNWY0YTRjYjU4ZjNiMzE1NWVhMTQ3N2E0YTk1NDg3ZmRkMmQxYTE4YmU0ZjA2NzBiZjMwZjMzMDRjNTkxZDgifQ%3D%3D'
+		),
+	));
+
+	$out = curl_exec($curl);
+	curl_close($curl);
+
+	if ($out) {
+		echo json_encode(['status' => true, 'url' => $out]);
+	} else
+		echo json_encode(['status' => false, 'message' => $out_dec['message']]);
+
+	die();
+}

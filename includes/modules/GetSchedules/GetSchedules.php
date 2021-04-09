@@ -182,7 +182,6 @@ class GetSchedules extends ET_Builder_Module {
 		$localDate_t = date("l", $date_t);
 		$month_day_t = $localMonth_t . ' ' . $this->ordinal_suffix_of($localDay_t);
 
-		
 		if ($localTime >= 18) {
 			return $this->get_times = sprintf('
 				<div class="date-container">
@@ -297,9 +296,9 @@ class GetSchedules extends ET_Builder_Module {
 	function get_countdown_shortcode() {
 		date_default_timezone_set('America/New_York');
 		$localTime = (int)date('H');
-
+		$times  = '';
 		if ($localTime >= 18) {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="5"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Tomorrow at 8:00 AM</p>
@@ -329,7 +328,7 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		} else if ($localTime >= 16) {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="4"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 6:00 PM</p>
@@ -359,7 +358,7 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		} else if ($localTime >= 12) {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="3"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 4:00 PM</p>
@@ -389,7 +388,7 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		} else if ($localTime >= 10) {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="2"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 12:00 PM</p>
@@ -419,7 +418,7 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		} else if ($localTime >= 8) {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="1"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 10:00 AM</p>
@@ -449,7 +448,7 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		}	else {
-			return $this->get_times = sprintf('
+			$times = sprintf('
 				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="0"> 
 				<label for="first-option" id="first-option-label" class="desktop-selector">
 					<p>Today at 8:00 AM</p>
@@ -479,6 +478,52 @@ class GetSchedules extends ET_Builder_Module {
 				</select>'
 			);
 		}
+		return $this->get_times = sprintf('
+			<form method="post" enctype="multipart/form-data" id="gform_1" class="booking-form">
+				<div class="gform_body">
+					<ul id="gform_fields_1" class="gform_fields top_label form_sublabel_below description_below">
+						<li id="field_1_7" class="gfield schedule-hours gfield_html gfield_html_formatted gfield_no_follows_desc field_sublabel_below field_description_below gfield_visibility_visible">
+							%1$s
+						</li>
+						<li id="field_1_1" class="gfield gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_1">
+								<span class="gfield_required">*</span>
+							</label>
+							<div class="ginput_container ginput_container_text">
+								<input name="input_1" id="input_1_1" type="text" value="" class="large" placeholder="First Name" aria-required="true" aria-invalid="false">
+							</div>
+						</li>
+						<li id="field_1_4" class="gfield gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_4">
+								Email<span class="gfield_required">*</span>
+							</label>
+							<div class="ginput_container ginput_container_email">
+								<input name="input_4" id="input_1_4" type="text" value="" class="large" placeholder="Email Address" aria-required="true" aria-invalid="false">
+							</div>
+						</li>
+						<li id="field_1_5" class="gfield field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_5">Phone</label>
+							<div class="ginput_container ginput_container_phone">
+								<input name="input_5" id="input_1_5" type="text" value="" class="large" placeholder="Phone Number(Optional)" aria-invalid="false">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="gform_footer top_label"> 
+					<input type="submit" id="gform_submit_button_1" class="gform_button button" value="Claim my free spot now"> 
+					<input type="hidden" name="gform_ajax" value="form_id=1&amp;title=&amp;description=&amp;tabindex=0">
+					<input type="hidden" class="gform_hidden" name="is_submit_1" value="1">
+					<input type="hidden" class="gform_hidden" name="gform_submit" value="1">
+					<input type="hidden" class="gform_hidden" name="gform_unique_id" value="">
+					<input type="hidden" class="gform_hidden" name="state_1" value="WyJbXSIsIjJhNzJhNDAzYTBhYjMyODZkNzUzNmVlNWRmNTA2MWEwIl0=">
+					<input type="hidden" class="gform_hidden" name="gform_target_page_number_1" id="gform_target_page_number_1" value="0">
+					<input type="hidden" class="gform_hidden" name="gform_source_page_number_1" id="gform_source_page_number_1" value="1">
+					<input type="hidden" name="gform_field_values" value="">
+        </div>
+			</form>
+			',
+			$times
+		);
 	}
 
 	public function render( $attr, $content = null, $render_slug ) {
