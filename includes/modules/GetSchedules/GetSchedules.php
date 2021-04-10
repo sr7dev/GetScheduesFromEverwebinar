@@ -304,8 +304,12 @@ class GetSchedules extends ET_Builder_Module {
 			return $i.' AM';
 		} else if ($hour_num == 12) {
 			return $i.' PM';
-		}else {
-			return '0'.($hour_num-12).substr($i, 2).' PM';
+		} else {
+			if ($hour_num-12 < 10) {
+				return '0'.($hour_num-12).substr($i, 2).' PM';
+			} else {
+				return ($hour_num-12).substr($i, 2).' PM';
+			}
 		}
 	}
 	function get_countdown_shortcode() {
