@@ -1,11 +1,11 @@
 jQuery(document).ready(function ($) {
 	function changedatetime(datetimestring) {
-		console.log(datetimestring)
 		let year = datetimestring.substring(0, 4);
-		let month = datetimestring.substring(5, 2);
-		let day = datetimestring.substring(8, 2);
-		let hours = datetimestring.substring(11, 2);
-		let mins = datetimestring.substring(14, 2);
+		let month = datetimestring.substring(5, 7);
+		let day = datetimestring.substring(8, 10);
+		let hours = datetimestring.substring(11, 13);
+		let mins = datetimestring.substring(14);
+		
 		if (parseInt(hours) < 12) {
 			return month+"-"+day+"-"+year+" "+hours+":"+mins+" AM";
 		} else if (parseInt(hours) == 12) {
@@ -77,7 +77,7 @@ jQuery(document).ready(function ($) {
 			success: function (resp) {
 				if (resp) {
 					let data = JSON.parse(resp);
-					console.log(data);
+					// console.log(data);
 					if (data.status == 'success') {
 						$('#thank_you').show();
 						$('#thank_you').find('#schedule_time p span').replaceWith(changedatetime(data.user.date));
