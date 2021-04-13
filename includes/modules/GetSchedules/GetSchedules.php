@@ -7,6 +7,7 @@ class GetSchedules extends ET_Builder_Module {
 	
 	public $get_times = 'get_times_shortcode';
 	public $get_countdown = 'get_countdown_shortcode';
+	public $get_countdown_ny = 'get_countdown_ny_shortcode';
 
 	protected $module_credits = array(
 		'module_uri' => '',
@@ -67,6 +68,36 @@ class GetSchedules extends ET_Builder_Module {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => "POST",
 			CURLOPT_POSTFIELDS => "api_key=93197255-f292-4650-a973-5bd4a0ffaf53&webinar_id=1",
+			CURLOPT_HTTPHEADER => array(
+				"Content-Type: application/x-www-form-urlencoded",
+				"Cookie: __cfduid=d0a6cf6c8b50dd4725266715ff4735cd91617788952; wj4s=u5NBNu7NveymPp8In55Ixzl4YEWlNiClqnWSlHlv"
+			),
+		));
+
+		$response = json_decode(curl_exec($curl), true);
+
+		curl_close($curl);
+		if (strcasecmp($response['status'], 'success') == 0) {
+			return $response;
+		} else {
+			return false;
+		}
+	}
+
+	public function getEWData_ny()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.webinarjam.com/everwebinar/webinar",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => "api_key=93197255-f292-4650-a973-5bd4a0ffaf53&webinar_id=2",
 			CURLOPT_HTTPHEADER => array(
 				"Content-Type: application/x-www-form-urlencoded",
 				"Cookie: __cfduid=d0a6cf6c8b50dd4725266715ff4735cd91617788952; wj4s=u5NBNu7NveymPp8In55Ixzl4YEWlNiClqnWSlHlv"
@@ -398,6 +429,108 @@ class GetSchedules extends ET_Builder_Module {
 		);
 	}
 
+	function get_countdown_ny_shortcode() {
+		date_default_timezone_set('America/New_York');
+		$localTime = (int)date('H');
+		$localDay = (int)date('d');
+		$times  = '';
+		$schedulesData = $this->getEWData_ny();
+		$schedules = $schedulesData['webinar']['schedules'];
+		
+		if (count($schedules) > 0) {
+			$times = sprintf('
+				<input required="required" type="radio" name="schedule" id="first-option" checked="checked" class="desktop-selector" value="%3$s"> 
+				<label for="first-option" id="first-option-label" class="desktop-selector">
+					<p>%1$s at %2$s</p>
+				</label> 
+				<input required="required" type="radio" name="schedule" id="second-option" class="desktop-selector" value="%6$s"> 
+				<label for="second-option" id="second-option-label" class="desktop-selector">
+					<p>%4$s at %5$s</p>
+				</label> 
+				<input required="required" type="radio" name="schedule" id="third-option" class="desktop-selector" value="%9$s"> 
+				<label for="third-option" id="third-option-label" class="desktop-selector">
+					<p>%7$s at %8$s</p>
+				</label>
+				<input required="required" type="radio" name="schedule" id="forth-option" class="desktop-selector" value="%12$s"> 
+				<label for="forth-option" id="forth-option-label" class="desktop-selector">
+					<p>%10$s at %11$s</p>
+				</label> 
+				<input required="required" type="radio" name="schedule" id="fifth-option" class="desktop-selector" value="%15$s"> 
+				<label for="fifth-option" id="fifth-option-label" class="desktop-selector">
+					<p>%13$s at %14$s</p>
+				</label> 
+				<select id="mobile-selector">
+					<option value="%3$s">%1$s at %2$s</option> 
+					<option value="%6$s">%4$s at %5$s</option> 
+					<option value="%9$s">%7$s at %8$s</option>
+					<option value="%12$s">%10$s at %11$s</option>
+					<option value="%15$s">%13$s at %14$s</option>
+				</select>',
+				((int)(substr($schedules[0]['date'], strlen($schedules[0]['date'])-8, 2)) == $localDay) ? "Today" : "Tomorrow",//1
+				$this->change12(substr($schedules[0]['date'], strlen($schedules[0]['date'])-5)),//2
+				$schedules[0]['schedule'],//3
+				((int)substr($schedules[1]['date'], strlen($schedules[1]['date'])-8, 2) == $localDay) ? "Today" : "Tomorrow",//4
+				$this->change12(substr($schedules[1]['date'], strlen($schedules[1]['date'])-5)),//5
+				$schedules[1]['schedule'],//6
+				((int)substr($schedules[2]['date'], strlen($schedules[2]['date'])-8, 2) == $localDay) ? "Today" : "Tomorrow",//7
+				$this->change12(substr($schedules[2]['date'], strlen($schedules[2]['date'])-5)),//8
+				$schedules[2]['schedule'],//9
+				((int)substr($schedules[3]['date'], strlen($schedules[3]['date'])-8, 2) == $localDay) ? "Today" : "Tomorrow",//10
+				$this->change12(substr($schedules[3]['date'], strlen($schedules[3]['date'])-5)),//11
+				$schedules[3]['schedule'],//12
+				((int)substr($schedules[4]['date'], strlen($schedules[4]['date'])-8, 2) == $localDay) ? "Today" : "Tomorrow",//13
+				$this->change12(substr($schedules[4]['date'], strlen($schedules[4]['date'])-5)),//14
+				$schedules[4]['schedule']//15
+			);
+		} 
+		return $this->get_times = sprintf('
+			<form method="post" enctype="multipart/form-data" id="gform_1" class="booking-form">
+				<div class="gform_body">
+					<ul id="gform_fields_1" class="gform_fields top_label form_sublabel_below description_below">
+						<li id="field_1_7" class="gfield schedule-hours gfield_html gfield_html_formatted gfield_no_follows_desc field_sublabel_below field_description_below gfield_visibility_visible">
+							%1$s
+						</li>
+						<li id="field_1_1" class="gfield gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_1">
+								<span class="gfield_required">*</span>
+							</label>
+							<div class="ginput_container ginput_container_text">
+								<input name="input_1" id="input_1_1" type="text" value="" class="large" placeholder="First Name" aria-required="true" aria-invalid="false">
+							</div>
+						</li>
+						<li id="field_1_4" class="gfield gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_4">
+								Email<span class="gfield_required">*</span>
+							</label>
+							<div class="ginput_container ginput_container_email">
+								<input name="input_4" id="input_1_4" type="text" value="" class="large" placeholder="Email Address" aria-required="true" aria-invalid="false">
+							</div>
+						</li>
+						<li id="field_1_5" class="gfield field_sublabel_below field_description_below hidden_label gfield_visibility_visible">
+							<label class="gfield_label" for="input_1_5">Phone</label>
+							<div class="ginput_container ginput_container_phone">
+								<input name="input_5" id="input_1_5" type="text" value="" class="large" placeholder="Phone Number(Optional)" aria-invalid="false">
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="gform_footer top_label"> 
+					<input type="submit" id="gform_submit_button_1_ny" class="gform_button button" value="Claim my free spot now"> 
+					<input type="hidden" name="gform_ajax" value="form_id=1&amp;title=&amp;description=&amp;tabindex=0">
+					<input type="hidden" class="gform_hidden" name="is_submit_1" value="1">
+					<input type="hidden" class="gform_hidden" name="gform_submit" value="1">
+					<input type="hidden" class="gform_hidden" name="gform_unique_id" value="">
+					<input type="hidden" class="gform_hidden" name="state_1" value="WyJbXSIsIjJhNzJhNDAzYTBhYjMyODZkNzUzNmVlNWRmNTA2MWEwIl0=">
+					<input type="hidden" class="gform_hidden" name="gform_target_page_number_1" id="gform_target_page_number_1" value="0">
+					<input type="hidden" class="gform_hidden" name="gform_source_page_number_1" id="gform_source_page_number_1" value="1">
+					<input type="hidden" name="gform_field_values" value="">
+        </div>
+			</form>
+			',
+			$times
+		);
+	}
+
 	public function render( $attr, $content = null, $render_slug ) {
 		return $content;
 	}
@@ -405,3 +538,4 @@ class GetSchedules extends ET_Builder_Module {
 $getSchedules = new GetSchedules;
 add_shortcode('get_times', array($getSchedules, 'get_times_shortcode')); 
 add_shortcode('get_countdown', array($getSchedules, 'get_countdown_shortcode')); 
+add_shortcode('get_countdown_ny', array($getSchedules, 'get_countdown_ny_shortcode')); 
